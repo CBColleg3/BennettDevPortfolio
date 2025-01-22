@@ -80,11 +80,11 @@ const Experience = () => {
   const camera1 = useRef();
   const camera2 = useRef();
 
-  const [zoom, setZoom] = useState(false);
-  const [focus, setFocus] = useState({});
+  //const [zoom, setZoom] = useState(false);
+  //const [focus, setFocus] = useState({});
 
-  //const {zoom, setZoom, focus, setFocus} = useZoomStore();
-  //console.log("zoom: " + zoom + "focus: " + focus);
+  const {zoom, setZoom, focus, setFocus} = useZoomStore();
+  console.log("zoom: " + zoom + "focus: " + focus);
 
 
   return ( 

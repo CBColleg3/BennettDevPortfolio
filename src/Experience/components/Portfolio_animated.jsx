@@ -15,6 +15,7 @@ import { useModalStore } from '../stores/modalStore';
 import AboutMe from '../../components/AboutMe/AboutMe';
 import Projects from '../../components/Projects/Projects';
 import Games from '../../components/Games/Games';
+import { useZoomStore } from '../stores/zoomStore';
 
 export default function Model({props, camera, zoomToView}) {
   //console.log(zoomToView);
@@ -28,9 +29,11 @@ export default function Model({props, camera, zoomToView}) {
   const [curAnimaion, SetCurAnimation] = React.useState(null);
 
   const { openModal } = useModalStore();
+  const {zoom,setZoom,focus,setFocus} = useZoomStore();
 
   const handleClickModal = (elementName) => {
     console.log("Click handled " + elementName);
+    if(zoom) return;
     if(elementName === "AboutMe") {
       openModal("About Me", <AboutMe/>, elementName);
     }
@@ -40,6 +43,27 @@ export default function Model({props, camera, zoomToView}) {
     else if (elementName === "Games") {
       openModal("Games", <Games/>, elementName);
     }
+  }
+
+  const zoomToModalObject = (objectPos) => {
+    if(zoom) return;
+    setZoom(true);
+    setFocus(objectPos);
+  }
+
+  const zoomToObject = (objectPos) => {
+
+    if(objectPos === focus ) {
+      setZoom(!zoom);
+    } else {
+      setZoom(true);
+    }
+   
+    setFocus(objectPos);
+  }
+
+  const zoomToRoomView = () => {
+    setZoom(false);
   }
 
   //console.log(nodes.Screen.geometry);
@@ -134,7 +158,7 @@ export default function Model({props, camera, zoomToView}) {
       <mesh name="Matt" geometry={nodes.Matt.geometry} material={materials.PaletteMaterial001} position={[-2.999, 3.669, 2.86]}/>
 
       <mesh name="Monitor" geometry={nodes.Monitor.geometry} material={materials.PaletteMaterial001} position={[-3.273, 6.915, -6.265]} 
-      onPointerOver={(e)=> PlayAnimation({e})} onClick={(e) => {zoomToView(e.object.position); handleClickModal("")}} >
+      onPointerOver={(e)=> PlayAnimation({e})} onClick={(e) => {zoomToObject(e.object.position); handleClickModal("")}} >
         <mesh position={[0, 2, 4.3]}>
           <VideoMaterial src={EFTSVideo} />
           <planeGeometry args={[14, 6, 2, 2]} />
@@ -142,45 +166,45 @@ export default function Model({props, camera, zoomToView}) {
       </mesh>
 
       <mesh name="Mouse" geometry={nodes.Mouse.geometry} material={materials.PaletteMaterial001} position={[1.089, 3.658, 1.75]}  
-      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
+      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToObject(e.object.position)}/>
 
       <mesh name="Pringles" geometry={nodes.Pringles.geometry} material={materials.PaletteMaterial001} position={[3.48, 5.576, 1.615]}  
-      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
+      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToObject(e.object.position)}/>
       
       <group name="Painting" position={[-20.323, 20.879, -30.836]}  
       onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} 
-      onClick={(e) => {zoomToView((e.object.parent) ? e.object.parent.position: e.object.position); handleClickModal("AboutMe")}}>
+      onClick={(e) => {zoomToModalObject((e.object.parent) ? e.object.parent.position: e.object.position); handleClickModal("AboutMe")}}>
         <mesh name="Cube190" geometry={nodes.Cube190.geometry} material={materials.PaletteMaterial002} />
         <mesh name="Cube190_1" geometry={nodes.Cube190_1.geometry} material={materials['Material.003']} />
       </group>
 
       <group name="Painting001" position={[-3.49, 17.224, -30.32]}  
       onPointerOver={(e)=> PlayAnimation({e})} 
-      onClick={(e) => {zoomToView((e.object.parent) ? e.object.parent.position: e.object.position); handleClickModal("Projects")}}>
+      onClick={(e) => {zoomToModalObject((e.object.parent) ? e.object.parent.position: e.object.position); handleClickModal("Projects")}}>
         <mesh name="Cube192" geometry={nodes.Cube192.geometry} material={materials.PaletteMaterial002} />
         <mesh name="Cube192_1" geometry={nodes.Cube192_1.geometry} material={materials['Material.005']} />
       </group>
 
       <group name="Painting002" position={[12.54, 21.04, -30.901]} 
       onPointerOver={(e)=> PlayAnimation({e})} 
-      onClick={(e) => {zoomToView((e.object.parent) ? e.object.parent.position: e.object.position); handleClickModal("Games")}}>
+      onClick={(e) => {zoomToModalObject((e.object.parent) ? e.object.parent.position: e.object.position); handleClickModal("Games")}}>
         <mesh name="Cube193" geometry={nodes.Cube193.geometry} material={materials.PaletteMaterial002} />
         <mesh name="Cube193_1" geometry={nodes.Cube193_1.geometry} material={materials['Material.006']} />
       </group>
 
       <mesh name="Amongus" geometry={nodes.Amongus.geometry} material={materials.PaletteMaterial001} position={[-11.232, 4.278, -1.472]}  
       onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} 
-      onClick={(e) => zoomToView(e.object.position)}/>
+      onClick={(e) => zoomToObject(e.object.position)}/>
       
       <mesh name="ArcadeCabinet" geometry={nodes.ArcadeCabinet.geometry} material={materials.PaletteMaterial001} position={[27.023, 6.033, -25.735]} 
-      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
+      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToObject(e.object.position)}/>
       
       <mesh name="Claw" geometry={nodes.Claw.geometry} material={materials.PaletteMaterial001} position={[27.594, 11.611, -25.697]} />
       
       <mesh name="GlassCabinet" geometry={nodes.GlassCabinet.geometry} material={materials.PaletteMaterial003} position={[27.233, 10.395, -26.052]} 
-      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
+      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToObject(e.object.position)}/>
 
-      <mesh name="Kayboard" geometry={nodes.Kayboard.geometry} material={materials.PaletteMaterial001} position={[-6.28, 4.103, 1.738]}  onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(new THREE.Vector3(-6.28, 4.103, 1.738))}>
+      <mesh name="Kayboard" geometry={nodes.Kayboard.geometry} material={materials.PaletteMaterial001} position={[-6.28, 4.103, 1.738]}  onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToObject(new THREE.Vector3(-6.28, 4.103, 1.738))}>
         <mesh name="Keys" geometry={nodes.Keys.geometry} material={materials.PaletteMaterial001} position={[-4.592, -0.18, -1.84]} rotation={[0.085, 0, 0]} />
         <mesh name="Keys002" geometry={nodes.Keys002.geometry} material={materials.PaletteMaterial001} position={[-4.592, -0.18, -1.84]} rotation={[0.085, 0, 0]} />
         <mesh name="Keys003" geometry={nodes.Keys003.geometry} material={materials.PaletteMaterial001} position={[-4.592, -0.18, -1.84]} rotation={[0.085, 0, 0]} />
@@ -311,7 +335,7 @@ export default function Model({props, camera, zoomToView}) {
         <mesh name="Keys166" geometry={nodes.Keys166.geometry} material={materials.PaletteMaterial001} position={[-4.592, -0.18, -1.84]} rotation={[0.085, 0, 0]} />
         <mesh name="Keys167" geometry={nodes.Keys167.geometry} material={materials.PaletteMaterial001} position={[-4.592, -0.18, -1.84]} rotation={[0.085, 0, 0]} />
       </mesh>
-      <mesh name="Pot" geometry={nodes.Pot.geometry} material={materials.PaletteMaterial001} position={[5.325, 3.965, -0.123]} rotation={[-0.087, 0.091, -0.014]}  onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(new THREE.Vector3(5.325, 3.965, -0.123))}> 
+      <mesh name="Pot" geometry={nodes.Pot.geometry} material={materials.PaletteMaterial001} position={[5.325, 3.965, -0.123]} rotation={[-0.087, 0.091, -0.014]}  onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToObject(new THREE.Vector3(5.325, 3.965, -0.123))}> 
         <mesh name="Cactus" geometry={nodes.Cactus.geometry} material={materials.PaletteMaterial001} position={[0.016, 0.994, 0.214]} rotation={[-0.118, 0.042, -0.013]} />
         <mesh name="Flower" geometry={nodes.Flower.geometry} material={materials.PaletteMaterial001} position={[0.012, 2.459, 0.387]} rotation={[0.089, -0.089, 0.022]} />
         <mesh name="Petal" geometry={nodes.Petal.geometry} material={materials.PaletteMaterial001} position={[0.28, 2.289, 0.632]} rotation={[0.089, -0.089, 0.022]} />
@@ -324,7 +348,7 @@ export default function Model({props, camera, zoomToView}) {
         <mesh name="Petal007" geometry={nodes.Petal007.geometry} material={materials.PaletteMaterial001} position={[0.234, 2.336, 0.155]} rotation={[0.055, 0.978, 0.038]} />
         <mesh name="Petal008" geometry={nodes.Petal008.geometry} material={materials.PaletteMaterial001} position={[0.041, 2.338, 0.024]} rotation={[-2.979, 1.293, 3.063]} />
       </mesh>
-      <mesh name="PCGlass" geometry={nodes.PCGlass.geometry} material={materials.PaletteMaterial004} position={[-2.436, -3.387, 2.664]}  onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView((e.object.parent) ? e.object.parent.position: e.object.position)} >
+      <mesh name="PCGlass" geometry={nodes.PCGlass.geometry} material={materials.PaletteMaterial004} position={[-2.436, -3.387, 2.664]}  onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToObject((e.object.parent) ? e.object.parent.position: e.object.position)} >
         <mesh name="Cooler" geometry={nodes.Cooler.geometry} material={materials.PaletteMaterial001} position={[-2.512, 1.664, -3.822]} />
         <mesh name="Cooler001" geometry={nodes.Cooler001.geometry} material={materials.PaletteMaterial001} position={[-3.876, 1.664, -3.822]} />
         <mesh name="Fan" geometry={nodes.Fan.geometry} material={materials.PaletteMaterial001} position={[-5.312, 1.857, -2.374]} rotation={[Math.PI / 2, 0, -Math.PI / 2]}   />

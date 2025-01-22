@@ -13,7 +13,7 @@ export const useModalStore = create((set) => ({
     modalType: type,
   }),
 
-  closeModal: (title, content, type) => set({
+  closeModal: () => set({
     isModalOpen: false,
     modalTitle: "",
     modalContent: null,

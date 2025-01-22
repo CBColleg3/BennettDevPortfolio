@@ -8,8 +8,8 @@ export const useZoomStore = create((set) => ({
     zoom: zoomValue
   }),
 
-  setFocus: (zoomValue) => set({
-    focus: (focusRef) => (setZoom(!zoomValue), setFocus(focusRef), console.log("zv:" + zoomValue))
+  setFocus: (focusRef) => set({
+    focus: focusRef,
   }),
 
 }))
