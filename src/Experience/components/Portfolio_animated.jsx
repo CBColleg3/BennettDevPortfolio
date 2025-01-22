@@ -11,9 +11,13 @@ import VideoMaterial from "./VideoMaterial";
 
 import EFTSVideo from '/EFTSGameplay.mp4';
 import SelectToZoom from './SelectToZoom';
+import { useModalStore } from '../stores/modalStore';
+import AboutMe from '../../components/AboutMe/AboutMe';
+import Projects from '../../components/Projects/Projects';
+import Games from '../../components/Games/Games';
 
 export default function Model({props, camera, zoomToView}) {
-  console.log(zoomToView);
+  //console.log(zoomToView);
   const group = React.useRef();
   const { nodes, materials, animations } = useGLTF('/portfolio_animated-transformed.glb')
   const { actions } = useAnimations(animations, group)
@@ -22,6 +26,21 @@ export default function Model({props, camera, zoomToView}) {
 
   const [hoveredMesh, SetHoveredMesh] = React.useState(null);
   const [curAnimaion, SetCurAnimation] = React.useState(null);
+
+  const { openModal } = useModalStore();
+
+  const handleClickModal = (elementName) => {
+    console.log("Click handled " + elementName);
+    if(elementName === "AboutMe") {
+      openModal("About Me", <AboutMe/>, elementName);
+    }
+    else if (elementName === "Projects") {
+      openModal("Projects", <Projects/>, elementName);
+    } 
+    else if (elementName === "Games") {
+      openModal("Games", <Games/>, elementName);
+    }
+  }
 
   //console.log(nodes.Screen.geometry);
 
@@ -114,33 +133,52 @@ export default function Model({props, camera, zoomToView}) {
       <mesh name="Leg" geometry={nodes.Leg.geometry} material={materials.PaletteMaterial001} position={[4.952, 0, 0]} />
       <mesh name="Matt" geometry={nodes.Matt.geometry} material={materials.PaletteMaterial001} position={[-2.999, 3.669, 2.86]}/>
 
-
-
-      <mesh name="Monitor" geometry={nodes.Monitor.geometry} material={materials.PaletteMaterial001} position={[-3.273, 6.915, -6.265]} onPointerOver={(e)=> PlayAnimation({e})} onClick={(e) => zoomToView(e.object.position)} >
+      <mesh name="Monitor" geometry={nodes.Monitor.geometry} material={materials.PaletteMaterial001} position={[-3.273, 6.915, -6.265]} 
+      onPointerOver={(e)=> PlayAnimation({e})} onClick={(e) => {zoomToView(e.object.position); handleClickModal("")}} >
         <mesh position={[0, 2, 4.3]}>
           <VideoMaterial src={EFTSVideo} />
           <planeGeometry args={[14, 6, 2, 2]} />
         </mesh>
       </mesh>
-      <mesh name="Mouse" geometry={nodes.Mouse.geometry} material={materials.PaletteMaterial001} position={[1.089, 3.658, 1.75]}  onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
-      <mesh name="Pringles" geometry={nodes.Pringles.geometry} material={materials.PaletteMaterial001} position={[3.48, 5.576, 1.615]}  onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
+
+      <mesh name="Mouse" geometry={nodes.Mouse.geometry} material={materials.PaletteMaterial001} position={[1.089, 3.658, 1.75]}  
+      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
+
+      <mesh name="Pringles" geometry={nodes.Pringles.geometry} material={materials.PaletteMaterial001} position={[3.48, 5.576, 1.615]}  
+      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
       
-      <group name="Painting" position={[-20.323, 20.879, -30.836]}  onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView((e.object.parent) ? e.object.parent.position: e.object.position)}>
+      <group name="Painting" position={[-20.323, 20.879, -30.836]}  
+      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} 
+      onClick={(e) => {zoomToView((e.object.parent) ? e.object.parent.position: e.object.position); handleClickModal("AboutMe")}}>
         <mesh name="Cube190" geometry={nodes.Cube190.geometry} material={materials.PaletteMaterial002} />
         <mesh name="Cube190_1" geometry={nodes.Cube190_1.geometry} material={materials['Material.003']} />
       </group>
-      <group name="Painting001" position={[-3.49, 17.224, -30.32]}  onPointerOver={(e)=> PlayAnimation({e})} onClick={(e) => zoomToView((e.object.parent) ? e.object.parent.position: e.object.position)}>
+
+      <group name="Painting001" position={[-3.49, 17.224, -30.32]}  
+      onPointerOver={(e)=> PlayAnimation({e})} 
+      onClick={(e) => {zoomToView((e.object.parent) ? e.object.parent.position: e.object.position); handleClickModal("Projects")}}>
         <mesh name="Cube192" geometry={nodes.Cube192.geometry} material={materials.PaletteMaterial002} />
         <mesh name="Cube192_1" geometry={nodes.Cube192_1.geometry} material={materials['Material.005']} />
       </group>
-      <group name="Painting002" position={[12.54, 21.04, -30.901]}  onPointerOver={(e)=> PlayAnimation({e})} onClick={(e) => zoomToView((e.object.parent) ? e.object.parent.position: e.object.position)}>
+
+      <group name="Painting002" position={[12.54, 21.04, -30.901]} 
+      onPointerOver={(e)=> PlayAnimation({e})} 
+      onClick={(e) => {zoomToView((e.object.parent) ? e.object.parent.position: e.object.position); handleClickModal("Games")}}>
         <mesh name="Cube193" geometry={nodes.Cube193.geometry} material={materials.PaletteMaterial002} />
         <mesh name="Cube193_1" geometry={nodes.Cube193_1.geometry} material={materials['Material.006']} />
       </group>
-      <mesh name="Amongus" geometry={nodes.Amongus.geometry} material={materials.PaletteMaterial001} position={[-11.232, 4.278, -1.472]}  onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
-      <mesh name="ArcadeCabinet" geometry={nodes.ArcadeCabinet.geometry} material={materials.PaletteMaterial001} position={[27.023, 6.033, -25.735]} onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
+
+      <mesh name="Amongus" geometry={nodes.Amongus.geometry} material={materials.PaletteMaterial001} position={[-11.232, 4.278, -1.472]}  
+      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} 
+      onClick={(e) => zoomToView(e.object.position)}/>
+      
+      <mesh name="ArcadeCabinet" geometry={nodes.ArcadeCabinet.geometry} material={materials.PaletteMaterial001} position={[27.023, 6.033, -25.735]} 
+      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
+      
       <mesh name="Claw" geometry={nodes.Claw.geometry} material={materials.PaletteMaterial001} position={[27.594, 11.611, -25.697]} />
-      <mesh name="GlassCabinet" geometry={nodes.GlassCabinet.geometry} material={materials.PaletteMaterial003} position={[27.233, 10.395, -26.052]} onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
+      
+      <mesh name="GlassCabinet" geometry={nodes.GlassCabinet.geometry} material={materials.PaletteMaterial003} position={[27.233, 10.395, -26.052]} 
+      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(e.object.position)}/>
 
       <mesh name="Kayboard" geometry={nodes.Kayboard.geometry} material={materials.PaletteMaterial001} position={[-6.28, 4.103, 1.738]}  onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToView(new THREE.Vector3(-6.28, 4.103, 1.738))}>
         <mesh name="Keys" geometry={nodes.Keys.geometry} material={materials.PaletteMaterial001} position={[-4.592, -0.18, -1.84]} rotation={[0.085, 0, 0]} />

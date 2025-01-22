@@ -1,10 +1,16 @@
 import { useState } from 'react'
-import './App.css'
+import './App.scss'
 import Experience from './Experience/Experience'
+import Modal from './components/Modal/Modal'
+import Projects from './components/Projects/Projects'
 
 function App() {
   return (
-    <Experience/>
+    <>
+        <Modal/>
+        <Experience/>
+    </>
+
   )
 }
 

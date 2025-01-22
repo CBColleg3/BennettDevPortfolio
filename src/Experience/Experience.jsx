@@ -7,7 +7,7 @@ import * as THREE from 'three';
 
 import EFTSVideo from '/EFTSGameplay.mp4';
 import Portfolio from "./components/Portfolio_animated"
-import SelectToZoom from './components/SelectToZoom';
+import { useZoomStore } from './stores/zoomStore';
 
 CameraControls.install({ THREE })
 
@@ -21,7 +21,7 @@ function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vec
   const camera = useThree((state) => state.camera)
   const gl = useThree((state) => state.gl)
   const controls = useMemo(() => new CameraControls(camera, gl.domElement), [])
-  console.log(focus);
+  console.log("x:" + focus.x + " y:" + focus.y + "z: " + focus.z);
 
   return useFrame((state, delta) => {
     //console.log(focus);
@@ -43,8 +43,8 @@ const Scene = ({ camera, zoomToView }) => {
     new THREE.Vector3(12.842780299819225,27.64306707811378,-10.959181707986152)
   ])
 
-  console.log(camera);
-  console.log(zoomToView);
+  //console.log(camera);
+  //console.log(zoomToView);
 
   //const vid = document.createElement("video");
   //vid.src = EFTSVideo;
@@ -82,6 +82,9 @@ const Experience = () => {
 
   const [zoom, setZoom] = useState(false);
   const [focus, setFocus] = useState({});
+
+  //const {zoom, setZoom, focus, setFocus} = useZoomStore();
+  //console.log("zoom: " + zoom + "focus: " + focus);
 
 
   return ( 
