@@ -9,8 +9,6 @@ import { useGLTF, useAnimations } from '@react-three/drei'
 import * as THREE from 'three';
 import VideoMaterial from "./VideoMaterial";
 
-import EFTSVideo from '/EFTSGameplay.mp4';
-
 export default function Model(props) {
   const group = React.useRef()
   const { nodes, materials, animations } = useGLTF('/portfolio_animated2-transformed.glb')
@@ -109,7 +107,6 @@ export default function Model(props) {
       <group name="Scene">
         <mesh name="Monitor" geometry={nodes.Monitor.geometry} material={materials.PaletteMaterial001} position={[-3.273, 6.915, -6.265]} onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} >
           <mesh name="Screen" geometry={nodes.Screen.geometry} material={materials.PaletteMaterial001} onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})}> 
-            <VideoMaterial src={EFTSVideo} />
           </mesh>
         </mesh>
         <mesh name="Room" geometry={nodes.Room.geometry} material={materials.PaletteMaterial001} position={[3.105, 24.532, 0]} onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})}/>
