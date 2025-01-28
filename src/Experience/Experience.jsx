@@ -5,7 +5,6 @@ import CameraControls from 'camera-controls'
 
 import * as THREE from 'three';
 
-import EFTSVideo from '/EFTSGameplay.mp4';
 import Portfolio from "./components/Portfolio_animated"
 import { useZoomStore } from './stores/zoomStore';
 
