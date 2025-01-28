@@ -9,7 +9,7 @@ import { useGLTF, useAnimations, Bounds } from '@react-three/drei'
 import * as THREE from 'three';
 import VideoMaterial from "./VideoMaterial";
 
-import EFTSVideo from '/EFTSGameplay.mp4';
+import EFTSVideo from 'EFTSGameplay.mp4';
 import SelectToZoom from './SelectToZoom';
 import { useModalStore } from '../stores/modalStore';
 import AboutMe from '../../components/AboutMe/AboutMe';
@@ -21,7 +21,7 @@ import CTF from '../../components/CTF/CTF';
 export default function Model({props, camera, zoomToView}) {
   //console.log(zoomToView);
   const group = React.useRef();
-  const { nodes, materials, animations } = useGLTF('/portfolio_animated-transformed.glb')
+  const { nodes, materials, animations } = useGLTF('portfolio_animated-transformed.glb')
   const { actions } = useAnimations(animations, group)
 
   const meshRef = React.useRef();
