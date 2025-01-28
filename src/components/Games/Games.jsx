@@ -8,7 +8,7 @@ const gameData = [
     TimeFrame: "Jan 2024 - Mar 2024",
     Link: "https://github.com/m-bocelli/climate-chantey",
     Header1: "Game Jam Winner",
-    Paragraph1: "Earned an Award for best Women Leadership through our main character who provided voice acting.",
+    Paragraph1: "Earned an Award for the best Women Leadership in the 2024 Climate Jam through the player character Kaptain Kori. This was my first fully voice acted game project with every developer on the team providing some form of voicework which really helped with immersion beyond the simple text based dialogue.",
     Header2: "Games for the Environment",
     Paragraph2: "A game to represent the dangers of climate change, which has developed into a major world issue. It takes place in a world set in a distant future, with sea levels that have risen everywhere and you play as a Captain on a boat to rescue the islanders from impeding doom, you can also collect trash along the way and use it as ammo to destroy the trash monsters who formed from all of the plastic in the ocean, and the harmful oil rigs which have been polluting the waters with tons of oil every day. Once you save all of the islanders you can return home and end in a victory screen!"
   },
@@ -38,7 +38,7 @@ const gameData = [
     TimeFrame: "Apr 2021 - Mar 2023",
     Link: "https://store.steampowered.com/app/2303670/Escape_From_The_Sun/",
     Header1: "Published Steam Game Project",
-    Paragraph1: "My very first published game with both steam achievement functionality and backed up saves with Steam Cloud.",
+    Paragraph1: "My very first published game with both steam achievement functionality and backed up saves with Steam Cloud. All of the achievements had to be developed into the game after the steam release which led to a few achievement bugs I had to fix quickly, while there are some achievements that are going to be a huge challenge for players to complete, I'm ultimately eager to grant some great long term goals for players who want an extra challenge while completing the game.",
     Header2: "First Unity Project",
     Paragraph2: "Escape from the Sun was a personal learning experience during my early years of exploring programming. The game began as a test for a high school project, but over time, I realized it had the potential to become something greater. I frequently updated the game, even though the project was often lost due to my older laptops breaking down. These setbacks pushed me to create new prototypes, each improving the gameplay and helping me grow as a game designer. After developing 3–4 iterations of the game, I finally released the completed version on Steam in 2023."
   },

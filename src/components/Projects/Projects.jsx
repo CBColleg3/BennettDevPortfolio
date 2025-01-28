@@ -9,8 +9,8 @@ const projectsData = [
     Link: "https://example.com/tcktmaster",
     Header1: "Seamless Ticket Management",
     Paragraph1: "Our goal was to get a site like EventBrite utilizing vanilla JS and Firebase for a client, included in the project is a database to store User credentials such as tickets purchased, a working payment system, QR Code scanning for the tickets, and a landing page which updates based on which events just got posted on the site with custom links generated for each event.",
-    Header2: "Teamwork makes the Dreamwork",
-    Paragraph2: "Great professional experience working with real world clients on a self-managed two person project, the main hurdles were eventually solved on getting the site up and functioning through planning and alot of whiteboarding."
+    Header2: "Team-Oriented Professional Development",
+    Paragraph2: "Great professional experience working with real world clients on a self-managed two person project, the main hurdles were eventually solved on getting the site up and functioning through extensive planning and reviewing web functionalities such as authentication services, adding user cart items to a database, and transferring cart items to user purchased tickets."
   },
   {
     Name: "RunR",

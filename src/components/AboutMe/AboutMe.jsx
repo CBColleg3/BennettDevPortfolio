@@ -34,14 +34,14 @@ const AboutMe = () => {
       <div>
       One development tool I became particularly excited about was the Runn API, which I utilized during my internship at Endevor. My manager needed an efficient way to oversee our engineering team by assigning tasks based on availability while avoiding scheduling conflicts across projects.
       My role was to build a timeline site that displayed all team members, the projects they were working on, and the start and completion dates for each task. Since the team was transitioning to Runn, I leveraged the Runn API to not only retrieve detailed data about team assignments but also to identify key projects from different sections and pinpoint potential overlaps.
-      This project was a valuable learning experience, as it required me to quickly adapt to new tools and deliver results within a tighter-than-usual deadline. It also served as my final project for the internship, marking a culmination of my contributions to the team.
+      I've learned alot of skills from this project, as it required me to quickly adapt to new tools and deliver results within a tighter-than-usual deadline. It also served as my final project for the internship, marking a culmination of my contributions to the team.
       </div>
 
       <h3 className='aboutMe-header'>What is one project you've worked on that required scaling  and how did that turn out?</h3>
       <div>
       One of my most significant projects requiring extensive scaling was Escape From The Sun, a game I developed over the course of a year and released on Steam. This project marked my introduction to the Unity game engine and C# programming, making it both a valuable learning experience and a stepping stone toward mastering the language.
-      Through the development process, I gained a deeper understanding of key concepts such as reusable code, object-oriented programming, and breaking down complex tasks into manageable steps. These skills not only improved my ability to tackle challenging problems but also enhanced my overall efficiency as a developer.
-      The game achieved moderate success, and the process greatly contributed to my growth. I became more adept at debugging and significantly improved my critical thinking skills. I also managed to refactor a considerable amount of legacy code and resolve numerous bugs more quickly than ever before. While there are aspects of the codebase I wish I had designed better, I'm ultimately proud of the project and satisfied with the final result.
+      Throughout the very long development process, I gained a deeper understanding of key concepts such as reusable code, object-oriented programming, and breaking down complex tasks into manageable steps. These skills not only improved my ability to tackle challenging problems but also enhanced my overall efficiency as a developer.
+      The game achieved moderate success, and the process greatly contributed to my growth as I've used the project as a learning experience for my future game projects. I became more adept at debugging and significantly improved my critical thinking skills. I also managed to refactor a considerable amount of legacy code and resolve numerous bugs more quickly than ever before. While there are aspects of the codebase I wish I had designed better, I'm ultimately proud of the project and satisfied with the final result.
       </div>
     </div>
   )
