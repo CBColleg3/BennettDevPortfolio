@@ -9,7 +9,7 @@ import { useGLTF, useAnimations, Bounds } from '@react-three/drei'
 import * as THREE from 'three';
 import VideoMaterial from "./VideoMaterial";
 
-//import EFTSVideo from '/EFTSGameplay.mp4';
+import EFTSVideo from '/EFTSGameplay.mp4';
 import SelectToZoom from './SelectToZoom';
 import { useModalStore } from '../stores/modalStore';
 import AboutMe from '../../components/AboutMe/AboutMe';
@@ -171,7 +171,7 @@ export default function Model({props, camera, zoomToView}) {
       <mesh name="Monitor" geometry={nodes.Monitor.geometry} material={materials.PaletteMaterial001} position={[-3.273, 6.915, -6.265]} 
       onPointerOver={(e)=> PlayAnimation({e})} onClick={(e) => {zoomToObject(e.object.position); handleClickModal("")}} >
         <mesh position={[0, 2, 4.3]}>
-          {/*<VideoMaterial src={EFTSVideo} />*/ }
+          {<VideoMaterial src={EFTSVideo} />}
           <planeGeometry args={[14, 6, 2, 2]} />
         </mesh>
       </mesh>
