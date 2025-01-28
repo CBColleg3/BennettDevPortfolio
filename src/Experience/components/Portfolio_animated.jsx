@@ -16,6 +16,7 @@ import AboutMe from '../../components/AboutMe/AboutMe';
 import Projects from '../../components/Projects/Projects';
 import Games from '../../components/Games/Games';
 import { useZoomStore } from '../stores/zoomStore';
+import CTF from '../../components/CTF/CTF';
 
 export default function Model({props, camera, zoomToView}) {
   //console.log(zoomToView);
@@ -24,9 +25,6 @@ export default function Model({props, camera, zoomToView}) {
   const { actions } = useAnimations(animations, group)
 
   const meshRef = React.useRef();
-
-  const [hoveredMesh, SetHoveredMesh] = React.useState(null);
-  const [curAnimaion, SetCurAnimation] = React.useState(null);
 
   const { openModal } = useModalStore();
   const {zoom,setZoom,focus,setFocus} = useZoomStore();
@@ -42,6 +40,8 @@ export default function Model({props, camera, zoomToView}) {
     } 
     else if (elementName === "Games") {
       openModal("Games", <Games/>, elementName);
+    } else if (elementName === "CTF") {
+      openModal("CTF", <CTF/>, elementName);
     }
   }
 
@@ -106,18 +106,29 @@ export default function Model({props, camera, zoomToView}) {
       //console.log(e.eventObject.name);
       const meshName = e.eventObject.name;
       const actionEnding = "Action";
+      let otherMeshName = e.eventObject.name;
+
+      if(meshName === "ArcadeCabinet" || meshName === "GlassCabinet") {
+        otherMeshName = (meshName === "ArcadeCabinet") ? "GlassCabinet": "ArcadeCabinet";
+        console.log("Arcade Cabinet detected");
+        if(!actions[GetAnimationName(otherMeshName)].isRunning()) {
+          actions[GetAnimationName(otherMeshName)].stop();
+          //actions[GetAnimationName(meshName)].paused = false;
+          actions[GetAnimationName(otherMeshName)].loop = THREE.LoopOnce;
+          actions[GetAnimationName(otherMeshName)].play();
+        }
+      }
 
       //Play New one
       if(meshName) {
         const animationName = GetAnimationName(meshName);
-        //console.log(actions[GetAnimationName(meshName)].isRunning());
+        console.log(meshName);
         
         if(!actions[GetAnimationName(meshName)].isRunning()) {
           actions[GetAnimationName(meshName)].stop();
           //actions[GetAnimationName(meshName)].paused = false;
           actions[GetAnimationName(meshName)].loop = THREE.LoopOnce;
           actions[GetAnimationName(meshName)].play();
-          SetCurAnimation(GetAnimationName(meshName));
         }
 
       }
@@ -197,12 +208,12 @@ export default function Model({props, camera, zoomToView}) {
       onClick={(e) => zoomToObject(e.object.position)}/>
       
       <mesh name="ArcadeCabinet" geometry={nodes.ArcadeCabinet.geometry} material={materials.PaletteMaterial001} position={[27.023, 6.033, -25.735]} 
-      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToObject(e.object.position)}/>
+      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => {zoomToModalObject(e.object.position); handleClickModal("CTF")}}/>
       
       <mesh name="Claw" geometry={nodes.Claw.geometry} material={materials.PaletteMaterial001} position={[27.594, 11.611, -25.697]} />
       
       <mesh name="GlassCabinet" geometry={nodes.GlassCabinet.geometry} material={materials.PaletteMaterial003} position={[27.233, 10.395, -26.052]} 
-      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToObject(e.object.position)}/>
+      onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => {zoomToModalObject(e.object.position); handleClickModal("CTF")}}/>
 
       <mesh name="Kayboard" geometry={nodes.Kayboard.geometry} material={materials.PaletteMaterial001} position={[-6.28, 4.103, 1.738]}  onPointerOver={(e)=> PlayAnimation({e})} onPointerOut={(e) => PauseAnimation({e})} onClick={(e) => zoomToObject(new THREE.Vector3(-6.28, 4.103, 1.738))}>
         <mesh name="Keys" geometry={nodes.Keys.geometry} material={materials.PaletteMaterial001} position={[-4.592, -0.18, -1.84]} rotation={[0.085, 0, 0]} />

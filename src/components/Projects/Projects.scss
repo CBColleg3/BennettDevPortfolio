@@ -1,0 +1,47 @@
+@use "../../index.scss" as styles;
+
+.project-image {
+   width: 45rem;
+   height: 20rem;
+}
+
+.project-container {
+   padding: 20px;
+}
+
+.project-title {
+   padding: 10px;
+   display: flex;
+   place-content: center;
+   justify-content: center;
+   border-bottom: 3px solid styles.$color-modal-header-black;
+}
+
+.project-timeframe {
+   padding-bottom: 10px;
+   display: flex;
+   place-content: center;
+   justify-content: center;
+}
+
+.project-button-container {
+   padding-top: 15px;
+   padding-bottom: 40px;
+   margin-bottom: 2rem;
+   display: flex;
+   place-content: center;
+   justify-content: center;
+   border-bottom: 3px solid styles.$color-modal-header-black;
+
+}
+
+.project-header {
+   background-color: styles.$color-modal-header-black;
+   padding: 10px;
+}
+
+.project-image-container {
+   display: flex;
+   place-content: center;
+   justify-content: center;
+}

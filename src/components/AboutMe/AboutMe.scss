@@ -1,0 +1,16 @@
+@use "../../index.scss" as styles;
+
+.aboutMe-container {
+   padding: 20px;
+}
+
+.aboutMe-header {
+   background-color:  styles.$color-modal-header-black;
+   padding: 10px;
+}
+
+.aboutMe-image-container {
+   display: flex;
+   place-content: center;
+   justify-content: center;
+}
