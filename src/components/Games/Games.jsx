@@ -59,7 +59,7 @@ const Games = () => {
             </h2>
             <i className="game-timeframe">{game.TimeFrame}</i>
             <h3 className="game-header">{game.Header1}</h3>
-            <p>{game.Paragraph1}</p>
+            <p className="game-body">{game.Paragraph1}</p>
             <h3 className="game-header">{game.Header2}</h3>
             <p className="game-body">{game.Paragraph2}</p>
 

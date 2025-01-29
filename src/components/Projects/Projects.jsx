@@ -67,7 +67,7 @@ const Projects = () => {
           <h2 className='project-title'>{project.Name}</h2>
           <i className="project-timeframe">{project.TimeFrame}</i>
           <h3 className="project-header">{project.Header1}</h3>
-          <p>{project.Paragraph1}</p>
+          <p className="project-body">{project.Paragraph1}</p>
           <h3 className="project-header">{project.Header2}</h3>
           <p className="project-body">{project.Paragraph2}</p>
 
