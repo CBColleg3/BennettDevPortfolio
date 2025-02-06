@@ -16,6 +16,7 @@ import AboutMe from '../../components/AboutMe/AboutMe';
 import Projects from '../../components/Projects/Projects';
 import Games from '../../components/Games/Games';
 import { useZoomStore } from '../stores/zoomStore';
+import { useRevealStore } from '../stores/revealStore';
 import CTF from '../../components/CTF/CTF';
 
 export default function Model({props, camera, zoomToView}) {
@@ -28,8 +29,10 @@ export default function Model({props, camera, zoomToView}) {
 
   const { openModal } = useModalStore();
   const {zoom,setZoom,focus,setFocus} = useZoomStore();
+  const {isAnimationFinished} = useRevealStore();
 
   const handleClickModal = (elementName) => {
+    if(!isAnimationFinished) return;
     console.log("Click handled " + elementName);
     if(zoom) return;
     if(elementName === "AboutMe") {
@@ -47,12 +50,13 @@ export default function Model({props, camera, zoomToView}) {
 
   const zoomToModalObject = (objectPos) => {
     if(zoom) return;
+    if(!isAnimationFinished) return;
     setZoom(true);
     setFocus(objectPos);
   }
 
   const zoomToObject = (objectPos) => {
-
+    if(!isAnimationFinished) return;
     if(objectPos === focus ) {
       setZoom(!zoom);
     } else {
@@ -155,6 +159,7 @@ export default function Model({props, camera, zoomToView}) {
       }
       return newMeshName;
     }
+    
 
   return (
     <group ref={group} {...props} dispose={null}>

@@ -7,6 +7,7 @@ import * as THREE from 'three';
 
 import Portfolio from "./components/Portfolio_animated"
 import { useZoomStore } from './stores/zoomStore';
+import { useRevealStore } from './stores/revealStore';
 
 CameraControls.install({ THREE })
 
@@ -83,11 +84,12 @@ const Experience = () => {
   //const [focus, setFocus] = useState({});
 
   const {zoom, setZoom, focus, setFocus} = useZoomStore();
+  const {isAnimationFinished} = useRevealStore();
   console.log("zoom: " + zoom + "focus: " + focus);
-
 
   return ( 
     <>
+    
       <Canvas
         linear
         eventSource={document.getElementById("root")}
