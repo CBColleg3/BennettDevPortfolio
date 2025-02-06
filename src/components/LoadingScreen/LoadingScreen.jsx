@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import "./LoadingScreen.scss";
-import { useProgress } from '@react-three/drei';
+import { useProgress, useGLTF } from '@react-three/drei';
 import { useRevealStore } from '../../Experience/stores/revealStore';
 
 const LoadingScreen = () => {
@@ -10,6 +10,7 @@ const LoadingScreen = () => {
 
     const {isRevealed, setIsRevealed, isAnimationFinished, setIsAnimationFinished} = useRevealStore();
 
+    useGLTF.preload('/portfolio_animated-transformed.glb');
 
     const handleReveal = () => {
         setIsRevealed(true);
@@ -23,7 +24,7 @@ const LoadingScreen = () => {
     useEffect(()=> {
         if(progress) {  
 
-            if(progress >= 100) {
+            if(progress >= 100 && useGLTF) {
                 handleReveal();
             }
         }
@@ -51,10 +52,7 @@ const LoadingScreen = () => {
                             ></div>     
                         <div className='percentage'>{Math.round(progress)}%</div>
                         </div>
-                    ) : !isRevealed ? (  
-                                 
-                    <button className="reveal-button" onClick={handleReveal}>Start Experience</button>      
-                ): (null)}
+                    ) : (null)}
             </div>
         </div>
     </>
